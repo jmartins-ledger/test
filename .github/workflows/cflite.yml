@@ -30,9 +30,9 @@ jobs:
         mode: 'batch'
         sanitizer: ${{ matrix.sanitizer }}
         # Optional but recommended: For storing certain artifacts from fuzzing.
-        storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jmartins-ledger/test.git
-        storage-repo-branch: main   # Optional. Defaults to "main"
-        storage-repo-branch-coverage: gh-pages  # Optional. Defaults to "gh-pages".
+        # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jmartins-ledger/test.git
+        # storage-repo-branch: main   # Optional. Defaults to "main"
+        # storage-repo-branch-coverage: gh-pages  # Optional. Defaults to "gh-pages".
   Pruning:
     runs-on: ubuntu-latest
     steps:
@@ -49,9 +49,9 @@ jobs:
         fuzz-seconds: 120 # 2 minutes
         mode: 'prune'
         # Optional but recommended.
-        storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jmartins-ledger/test.git
-        storage-repo-branch: fuzz-corpus   # Optional. Defaults to "main"
-        storage-repo-branch-coverage: fuzz-coverage  # Optional. Defaults to "gh-pages".
+        # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jmartins-ledger/test.git
+        # storage-repo-branch: fuzz-corpus   # Optional. Defaults to "main"
+        # storage-repo-branch-coverage: fuzz-coverage  # Optional. Defaults to "gh-pages".
   Coverage:
     runs-on: ubuntu-latest
     steps:
@@ -70,7 +70,7 @@ jobs:
         mode: 'coverage'
         sanitizer: 'coverage'
         # Optional but recommended.
-        storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jmartins-ledger/test.git
-        storage-repo-branch: fuzz-corpus   # Optional. Defaults to "main"
-        storage-repo-branch-coverage: fuzz-coverage  # Optional. Defaults to "gh-pages".
+        # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jmartins-ledger/test.git
+        # storage-repo-branch: fuzz-corpus   # Optional. Defaults to "main"
+        # storage-repo-branch-coverage: fuzz-coverage  # Optional. Defaults to "gh-pages".
 
