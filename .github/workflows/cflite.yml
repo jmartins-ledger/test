@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sanitizer: [address, memory] # Override this with the sanitizers you want.
+        sanitizer: [address, memory, undefined] # Override this with the sanitizers you want.
     steps:
     - name: Build Fuzzers (${{ matrix.sanitizer }})
       id: build
@@ -29,6 +29,7 @@ jobs:
         fuzz-seconds: 120 # 2 minutes
         mode: 'batch'
         sanitizer: ${{ matrix.sanitizer }}
+        output-sarif: true
         # Optional but recommended: For storing certain artifacts from fuzzing.
         # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jmartins-ledger/test.git
         # storage-repo-branch: main   # Optional. Defaults to "main"
@@ -48,6 +49,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         fuzz-seconds: 120 # 2 minutes
         mode: 'prune'
+        output-sarif: true
         # Optional but recommended.
         # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jmartins-ledger/test.git
         # storage-repo-branch: fuzz-corpus   # Optional. Defaults to "main"
