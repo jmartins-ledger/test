@@ -1,11 +1,11 @@
-name: ClusterFuzzLite fuzzing
+name: ClusterFuzzLite cron tasks
 on:
   workflow_dispatch:
   push:
     branches:
       - main  # Use your actual default branch here.
   schedule:
-    - cron: '*/6 * * * *'  # Every 6 minutes
+    - cron: '0 13 * * 6'  # At 01:00 PM, only on Saturday
 permissions: read-all
 jobs:
   BatchFuzzing:
@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sanitizer: [address, memory, undefined] # Override this with the sanitizers you want.
+        sanitizer: [address, undefined, memory] # Override this with the sanitizers you want.
     steps:
     - name: Build Fuzzers (${{ matrix.sanitizer }})
       id: build
@@ -26,12 +26,12 @@ jobs:
       uses: google/clusterfuzzlite/actions/run_fuzzers@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        fuzz-seconds: 120 # 2 minutes
+        fuzz-seconds: 300 # 5 minutes
         mode: 'batch'
         sanitizer: ${{ matrix.sanitizer }}
-        output-sarif: true
+        outpuf-sarif: true
         # Optional but recommended: For storing certain artifacts from fuzzing.
-        # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jmartins-ledger/test.git
+        # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/OWNER/STORAGE-REPO-NAME.git
         # storage-repo-branch: main   # Optional. Defaults to "main"
         # storage-repo-branch-coverage: gh-pages  # Optional. Defaults to "gh-pages".
   Pruning:
@@ -47,13 +47,13 @@ jobs:
       uses: google/clusterfuzzlite/actions/run_fuzzers@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        fuzz-seconds: 120 # 2 minutes
+        fuzz-seconds: 300 # 5 minutes
         mode: 'prune'
         output-sarif: true
         # Optional but recommended.
-        # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jmartins-ledger/test.git
-        # storage-repo-branch: fuzz-corpus   # Optional. Defaults to "main"
-        # storage-repo-branch-coverage: fuzz-coverage  # Optional. Defaults to "gh-pages".
+        # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/OWNER/STORAGE-REPO-NAME.git
+        # storage-repo-branch: main   # Optional. Defaults to "main"
+        # storage-repo-branch-coverage: gh-pages  # Optional. Defaults to "gh-pages".
   Coverage:
     runs-on: ubuntu-latest
     steps:
@@ -68,11 +68,11 @@ jobs:
       uses: google/clusterfuzzlite/actions/run_fuzzers@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        fuzz-seconds: 120 # 2 minutes
+        fuzz-seconds: 300 # 5 minutes
         mode: 'coverage'
         sanitizer: 'coverage'
         # Optional but recommended.
-        # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jmartins-ledger/test.git
-        # storage-repo-branch: fuzz-corpus   # Optional. Defaults to "main"
-        # storage-repo-branch-coverage: fuzz-coverage  # Optional. Defaults to "gh-pages".
+        # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/OWNER/STORAGE-REPO-NAME.git
+        # storage-repo-branch: main   # Optional. Defaults to "main"
+        # storage-repo-branch-coverage: gh-pages  # Optional. Defaults to "gh-pages".
 
