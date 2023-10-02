@@ -29,7 +29,7 @@ void pp_vector(uint8_t *data, uint32_t size)
     {
         printf("Object[%d]\n", i);
         uint8_t *object = &data[i * object_size];
-        for (uint16_t j = 0; j < object_size; j++)
+        for (uint16_t j = 0; j <= object_size; j++)
         {
             printf("%x", object[j]);
         }
