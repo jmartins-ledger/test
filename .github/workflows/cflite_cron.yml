@@ -30,7 +30,7 @@ jobs:
         fuzz-seconds: 300 # 5 minutes
         mode: 'batch'
         sanitizer: ${{ matrix.sanitizer }}
-        outpuf-sarif: true
+        output-sarif: true
         # Optional but recommended: For storing certain artifacts from fuzzing.
         # storage-repo: https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/OWNER/STORAGE-REPO-NAME.git
         # storage-repo-branch: main   # Optional. Defaults to "main"
