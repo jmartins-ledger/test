@@ -19,7 +19,7 @@ jobs:
           - mode: batch
             sanitizer: memory
           - mode: prune
-            sanitizer: IDKKK
+            sanitizer: address
           - mode: coverage
             sanitizer: coverage
     steps:
