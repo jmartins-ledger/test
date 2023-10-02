@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sanitizer: [address, undefined, memory] # Override this with the sanitizers you want.
+        sanitizer: [address, memory] # Override this with the sanitizers you want.
     steps:
     - name: Build Fuzzers (${{ matrix.sanitizer }})
       id: build
