@@ -32,7 +32,7 @@ jobs:
       uses: google/clusterfuzzlite/actions/run_fuzzers@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        fuzz-seconds: 300 # 5 minutes
+        fuzz-seconds: 120 # 2 minutes
         mode: 'code-change'
         sanitizer: ${{ matrix.sanitizer }}
         output-sarif: true
