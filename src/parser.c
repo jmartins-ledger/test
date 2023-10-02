@@ -19,9 +19,9 @@ void pp_vector(uint8_t *data, uint32_t size)
         return;
     }
 
-    if (nb_objects * object_size > size) {
-        return;
-    }
+    // if (nb_objects * object_size > size) {
+    //     return;
+    // }
 
     data = &data[2];
 
